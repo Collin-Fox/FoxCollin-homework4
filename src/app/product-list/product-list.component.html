@@ -1,7 +1,7 @@
 <div name="search" class="search" xmlns="http://www.w3.org/1999/html">
-  <form (ngSubmit)="onSearch('f')">
+  <form (ngSubmit)="onSearch()">
   <span>Search For a Product
-    <input type="text">
+    <input type="text" name="search" [(ngModel)]="search">
     <input type="submit" value="Search">
   </span>
   </form>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Product } from "../product";
 import { ProductService } from "../product.service";
 import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
+import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -17,14 +17,29 @@ export class ProductListComponent implements  OnInit{
   //Empty list of products
   products: Product[] = [];
 
+  search: string = "";
+
   //This component is using a product service class to get data
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
 
+  onSearch(){
+
+    //When i click the button to search:
+    /*
+    1: Route to list/:search url with the text box body as the search param
+    2: Set the products param in this file to the search server call
+     */
+    this.productService.searchProduct(this.search).subscribe(data =>{
+      this.products = data;
+      this.router.navigate(['/list', this.search])
+    })
+  }
 
 
   //what happens when the page opens
   ngOnInit(){
+
     this.productService.getAllProducts().subscribe(data => {
       console.log(data);
       this.products = data;
@@ -32,10 +47,5 @@ export class ProductListComponent implements  OnInit{
   }
 
 
-  onSearch(search: string){
-    this.productService.searchProduct(search).subscribe(data =>{
-      this.products = data;
-    })
-  }
 
 }

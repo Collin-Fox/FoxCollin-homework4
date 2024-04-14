@@ -1,1 +1,45 @@
-<p>edit-product works!</p>
+<h1>Edit the product {{sku}}</h1>
+
+
+<form (ngSubmit)="onSubmit()">
+  <table>
+    <!--
+    This is where we build the form, it also needs validation
+    -->
+
+    <tbody>
+
+    <tr>
+      <td>SKU</td>
+      <td><input disabled type="text" name="sku" [(ngModel)]="product.sku"></td>
+    </tr>
+
+    <tr>
+      <td>Name</td>
+      <td><input type="text" name="name" [(ngModel)]="product.name"></td>
+    </tr>
+
+    <tr>
+      <td>Description</td>
+      <td><input type="text" name="description" [(ngModel)]="product.description"></td>
+    </tr>
+
+    <tr>
+      <td>Category</td>
+      <td><input type="text" name="category" [(ngModel)]="product.category"></td>
+    </tr>
+
+    <tr>
+      <td>Price</td>
+      <td><input type="text" name="price" [(ngModel)]="product.price"></td>
+    </tr>
+
+
+    <tr>
+      <td colspan="2"><input type="submit" value="Edit Product"><input type="reset" aria-valuemax="Reset"></td>
+    </tr>
+
+
+    </tbody>
+  </table>
+</form>

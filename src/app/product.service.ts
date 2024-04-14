@@ -26,6 +26,11 @@ export class ProductService {
     return this.http.post<Product>(this.urlBase + '/product', product);
   }
 
+  // Edit a product
+  public editProduct(product: Product): Observable<any>{
+    return this.http.put<Product>(this.urlBase + '/product', product);
+  }
+
   public searchProduct(search: string): Observable<any>{
     return this.http.get(this.urlBase + '/products/contains/' + search);
   }

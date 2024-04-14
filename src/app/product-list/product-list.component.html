@@ -1,0 +1,26 @@
+<div name="search" class="search" xmlns="http://www.w3.org/1999/html">
+  <form (ngSubmit)="onSearch('f')">
+  <span>Search For a Product
+    <input type="text">
+    <input type="submit" value="Search">
+  </span>
+  </form>
+</div>
+
+<h1>List of Products</h1>
+
+
+<table>
+
+  <tr>
+    <th>SKU</th>
+    <th>Name</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let product of products">
+    <td><a [routerLink]="['/product', product.sku]">{{product.sku}}</a></td>
+    <td>{{product.name}}</td>
+    <td> {{product.price}}</td>
+  </tr>
+
+</table>

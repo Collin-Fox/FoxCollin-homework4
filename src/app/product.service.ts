@@ -15,6 +15,10 @@ export class ProductService {
     return this.http.get(this.urlBase + '/products');
   }
 
+  public getAllProductsByCategory(category: string): Observable<any>{
+    return this.http.get(this.urlBase + '/products/' + category)
+  }
+
   //Get a product by its sku
   public getProductBySku(sku: string): Observable<any>{
     console.log("CALLED BY SKU");

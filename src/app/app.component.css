@@ -1,0 +1,24 @@
+
+.top_bar{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: lightpink;
+  top: 0;
+}
+
+a:hover{
+  color: deeppink;
+  cursor: pointer;
+}
+
+.inner_top a{
+  margin-left: 20px;
+  color: black;
+}
+
+.inner_top a:hover{
+  color: deeppink;
+  cursor: pointer;
+}
+

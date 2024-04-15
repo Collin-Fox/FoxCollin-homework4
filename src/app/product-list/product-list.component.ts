@@ -19,6 +19,10 @@ export class ProductListComponent implements  OnInit{
 
   search: string = "";
 
+  categories: Set<string> = new Set<string>();
+
+  category: string = "";
+
   //This component is using a product service class to get data
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
@@ -32,9 +36,37 @@ export class ProductListComponent implements  OnInit{
       console.log("What im showing")
       console.log(data);
       this.products = data;
+
+      //create a set of all categories
+      for(var product of data){
+        console.log("Test One")
+        this.categories.add(product.category)
+      }
+
+      console.log(this.categories);
+
     })
+
+
+
+
   }
 
+  //when someone selects a category
+  onCategory(){
+    console.log("This is the category: " + this.category)
+    if(this.category == "none" || this.category == ""){
+      this.productService.getAllProducts().subscribe(data =>{
+        this.products = data;
+      });
+    }else{
+      this.productService.getAllProductsByCategory(this.category).subscribe(data =>{
+        this.products = data;
+      })
+    }
+  }
+
+  //when someone is searching in the search bar
   onSearch(){
 
     //if there is something in the search bar look for it, if not just show everything
@@ -52,6 +84,8 @@ export class ProductListComponent implements  OnInit{
     }
 
   }
+
+  //General sorts of different elements of a product
 
   compareSKU(a: Product, b: Product){
     return (a.sku >= b.sku) ? (1) : (-1);

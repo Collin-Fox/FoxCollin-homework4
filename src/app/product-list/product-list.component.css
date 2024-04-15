@@ -1,0 +1,48 @@
+table{
+  text-align: center;
+  vertical-align: middle;
+}
+tbody tr:nth-child(odd) {
+  background-color: lightpink;
+}
+
+th a:hover{
+  color: deeppink;
+  cursor: pointer;
+}
+
+a:hover{
+  color: deeppink;
+  cursor: pointer;
+}
+
+.search{
+
+  display: inline-block;
+  float: left;
+  padding-left: 20px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+
+}
+
+
+.search input, select{
+
+  border:none;
+  outline:none;
+
+  height:34px;
+  vertical-align:middle;
+  position:relative;
+  bottom:14px;
+  right:9px;
+  border-radius:22px;
+  width:220px;
+  box-sizing:border-box;
+  padding-left: 25px;
+
+
+}

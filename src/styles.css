@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  background-color: lavenderblush;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+

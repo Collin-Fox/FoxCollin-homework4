@@ -25,6 +25,7 @@ export class DetailedProductComponent implements OnInit{
   deleteProduct(){
     this.productService.deleteProduct(this.sku).subscribe(data =>{
       this.p = data;
+      this.router.navigateByUrl('/list')
     });
   }
 

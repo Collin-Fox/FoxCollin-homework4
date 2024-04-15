@@ -1,16 +1,19 @@
-<div name="search" class="search" xmlns="http://www.w3.org/1999/html">
+<body>
+<div name="search" class="search">
   <form>
-  <span>Search For a Product
+    <span><h3>Search For a Product</h3>
     <input (input)="onSearch()" type="text" name="search" [(ngModel)]="search">
+    <select (change)="onCategory()" name="category" id="category" [(ngModel)]="category">
+      <option value="none">None</option>
+      <option *ngFor="let category of categories" value={{category}}>{{category}}</option>
+    </select>
   </span>
   </form>
 </div>
 
-<h1>List of Products</h1>
-
 
 <table>
-
+  <tbody>
   <tr>
     <th><a (click)="sortSku()">SKU</a></th>
     <th><a (click)="sortName()">Name</a></th>
@@ -21,8 +24,10 @@
   <tr *ngFor="let product of products">
     <td><a [routerLink]="['/product', product.sku]">{{product.sku}}</a></td>
     <td>{{product.name}}</td>
-    <td> {{product.price}}</td>
+    <td> ${{product.price}}</td>
     <td><a [routerLink]="['/editproduct', product.sku]">Edit me</a></td>
   </tr>
+  </tbody>
 
 </table>
+</body>

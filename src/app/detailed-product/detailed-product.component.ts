@@ -22,6 +22,12 @@ export class DetailedProductComponent implements OnInit{
     this.p = new Product();
   }
 
+  deleteProduct(){
+    this.productService.deleteProduct(this.sku).subscribe(data =>{
+      this.p = data;
+    });
+  }
+
   //What happens when the component is loaded
   ngOnInit() {
     console.log("ONINIT")

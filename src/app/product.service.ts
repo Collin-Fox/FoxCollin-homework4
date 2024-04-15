@@ -34,4 +34,9 @@ export class ProductService {
   public searchProduct(search: string): Observable<any>{
     return this.http.get(this.urlBase + '/products/contains/' + search);
   }
+
+  public deleteProduct(sku: string): Observable<any>{
+    console.log("From the service" + sku)
+    return this.http.delete<Product>(this.urlBase + '/product/' + sku);
+  }
 }

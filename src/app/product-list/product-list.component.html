@@ -1,8 +1,7 @@
 <div name="search" class="search" xmlns="http://www.w3.org/1999/html">
-  <form (ngSubmit)="onSearch()">
+  <form>
   <span>Search For a Product
-    <input type="text" name="search" [(ngModel)]="search">
-    <input type="submit" value="Search">
+    <input (input)="onSearch()" type="text" name="search" [(ngModel)]="search">
   </span>
   </form>
 </div>
@@ -13,14 +12,17 @@
 <table>
 
   <tr>
-    <th>SKU</th>
-    <th>Name</th>
-    <th>Price</th>
+    <th><a (click)="sortSku()">SKU</a></th>
+    <th><a (click)="sortName()">Name</a></th>
+    <th><a (click)="sortPrice()">Price</a></th>
+    <th>Edit?</th>
+
   </tr>
   <tr *ngFor="let product of products">
     <td><a [routerLink]="['/product', product.sku]">{{product.sku}}</a></td>
     <td>{{product.name}}</td>
     <td> {{product.price}}</td>
+    <td><a [routerLink]="['/editproduct', product.sku]">Edit me</a></td>
   </tr>
 
 </table>

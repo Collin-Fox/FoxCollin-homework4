@@ -4,6 +4,7 @@ import { ProductService } from "../product.service";
 import { CommonModule } from "@angular/common";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-product-list',
@@ -74,18 +75,18 @@ export class ProductListComponent implements  OnInit{
     if(this.search == "") {
       this.productService.getAllProducts().subscribe(data =>{
         this.products = data;
-      });
+      }, error => {console.log("Failed to load products " + error)});
     }else{
       this.productService.searchProduct(this.search).subscribe(data =>{
         this.products = data;
         console.log("Searched" + this.search);
         console.log(this.products)
-      })
+      }, error => {console.log("Failed to load search" + error)})
     }
 
   }
 
-  //General sorts of different elements of a product
+  //General sorts of different elements of a product, you can click the table row to sort them
 
   compareSKU(a: Product, b: Product){
     return (a.sku >= b.sku) ? (1) : (-1);

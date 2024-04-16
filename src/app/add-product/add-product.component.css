@@ -1,0 +1,29 @@
+/*If its invalid make sure they cant submit style*/
+/*\\Decorating the submit and reset input\\*/
+.editButton {
+  background-color: palevioletred; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/*\\Change the color on the mouse hover\\*/
+.editButton:hover{
+  cursor: pointer;
+  background-color: deeppink;
+}
+.invalidButton{
+  cursor: not-allowed;
+  opacity: .2;
+}
+
+.invalidButton:hover{
+  cursor: not-allowed;
+  opacity: .2;
+}
+

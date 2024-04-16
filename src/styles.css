@@ -9,3 +9,12 @@ a {
   text-decoration: none;
 }
 
+.invalidLabel{
+  color: red;
+}
+
+.invalidButton{
+  cursor: not-allowed;
+  background-color: darkblue;
+}
+

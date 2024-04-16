@@ -29,6 +29,10 @@ export class DetailedProductComponent implements OnInit{
     });
   }
 
+  editProduct(){
+    this.router.navigateByUrl('/editproduct/' + this.sku);
+  }
+
   //What happens when the component is loaded
   ngOnInit() {
     console.log("ONINIT")

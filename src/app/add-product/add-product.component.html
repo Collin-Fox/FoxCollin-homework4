@@ -14,12 +14,12 @@
     <tr>
       <td>
         <span [ngClass]="{'invalidLabel': skuExists || sku.invalid}"> SKU
-          <span *ngIf="skuExists && (sku.pristine && sku.untouched)">SKU EXISTS</span>
-          <span *ngIf="sku.invalid &&(sku.errors?.['min'] != null && sku.errors?.['max'] != null)">SKU NEEDS TO BE A 7 DIGIT NUMBER</span>
-          <span *ngIf="sku.invalid && (sku.touched || sku.dirty) && (sku.errors?.['required'] != null)">SKU MUST NOT BE BLANK</span>
+          <span *ngIf="skuExists"> (EXISTS)</span>
+          <span *ngIf="sku.invalid &&(sku.errors?.['min'] != null || sku.errors?.['max'] != null)"> (SKU NEEDS TO BE A 7 DIGIT NUMBER)</span>
+          <span *ngIf="sku.invalid && (sku.touched || sku.dirty) && (sku.errors?.['required'] != null)"> (SKU MUST NOT BE BLANK) </span>
         </span>
       </td>
-      <td><input type="number" required min="1000000" max="9999999" name="sku" [(ngModel)]="product.sku" #sku="ngModel"></td>
+      <td><input placeholder="1000000" type="number" required min="1000000" max="9999999" name="sku" [(ngModel)]="product.sku" #sku="ngModel"></td>
     </tr>
 
     <!--
@@ -29,13 +29,13 @@
 
     <tr>
       <td>
-        <span [ngClass]="{'invalidLabel': name.invalid && (sku.dirty && sku.touched)}">NAME
-        <span *ngIf="name.invalid && (sku.dirty && sku.touched) && (name.errors?.['required'] != null)"> Cant be blank</span>
-        <span *ngIf="name.invalid && (sku.dirty && sku.touched) && (name.errors?.['maxlength'] != null)"> Cant be longer than 30 characters</span>
+        <span [ngClass]="{'invalidLabel': name.invalid && (name.dirty && name.touched)}">NAME
+        <span *ngIf="name.invalid && (name.dirty && name.touched) && (name.errors?.['required'] != null)"> (Cant be blank)</span>
+        <span *ngIf="name.invalid && (name.dirty && name.touched) && (name.errors?.['maxlength'] != null)"> (Cant be longer than 30 characters)</span>
         </span>
       </td>
 
-      <td><input type="text" required maxlength="30" name="name" [(ngModel)]="product.name" #name="ngModel"></td>
+      <td><input placeholder="Name" type="text" required maxlength="30" name="name" [(ngModel)]="product.name" #name="ngModel"></td>
     </tr>
 
     <!--
@@ -44,9 +44,16 @@
     -->
 
     <tr>
-      <td>Description</td>
+      <td>
 
-      <td><input type="text" name="description" [(ngModel)]="product.description" #description = "ngModel"></td>
+        <span [ngClass]="{'invalidLabel': description.invalid && (description.dirty && description.touched)}">Description
+        <span *ngIf="description.invalid && (description.dirty && description.touched) && (description.errors?.['required'] != null)"> (Cant be blank)</span>
+        <span *ngIf="description.invalid && (description.dirty && description.touched) && (description.errors?.['maxlength'] != null)"> (Cant be longer than 30 characters)</span>
+
+                </span>
+      </td>
+
+      <td><input placeholder="Description" type="text" name="description" required maxlength="300" [(ngModel)]="product.description" #description = "ngModel"></td>
     </tr>
 
 
@@ -58,31 +65,48 @@
 
 
     <tr>
-      <td>Category</td>
+      <td>
+        <span [ngClass]="{'invalidLabel': category.invalid && (category.dirty && category.touched)}">Category
+        <span *ngIf="category.invalid && (category.dirty && category.touched) && (category.errors?.['required'] != null)"> (Cant be blank)</span>
+        <span *ngIf="category.invalid && (category.dirty && category.touched) && (category.errors?.['maxlength'] != null)"> (Cant be longer than 30 characters)</span>
 
-      <td><input type="text" name="category" [(ngModel)]="product.category" #category = "ngModel"></td>
+                </span></td>
+      <td><input placeholder="Category" type="text" name="category" required maxlength="3" [(ngModel)]="product.category" #category = "ngModel"></td>
     </tr>
 
 
     <!--
     Validation of price
-    TODO: Must not be larger than 30 characters, must exist
+    TODO: Must not be larger than 30 characters, must exist, must be a number
     -->
 
     <tr>
     <td>
-      <span [ngClass]="{'invalidLabel' : price.invalid}"> PRICE
 
-      </span>
+        <span [ngClass]="{'invalidLabel': price.invalid && (price.dirty && price.touched)}">Price
+        <span *ngIf="price.invalid && (price.dirty && price.touched) && (price.errors?.['required'] != null)"> (Cant be blank)</span>
+        <span *ngIf="price.invalid && (price.dirty && price.touched) && (price.errors?.['min'] != null)"> (Has to be positive)</span>
+
+                </span>
     </td>
 
-     <td><input type = "text" required min="0"  name="price" [(ngModel)]="product.price" #price = "ngModel"></td>
+     <td><input type = "number" required min="0.01" name="price" [(ngModel)]="product.price" #price = "ngModel"></td>
 
 
     </tr>
 
+    <!--
+    Submit and reset buttons. I do not allow the submit button to be clicked unless the form is valid for fun
+    -->
+
     <tr>
-      <td colspan="2"><input type="submit" value="Add Product"><input type="reset" aria-valuemax="Reset"></td>
+
+      <td colspan="2">
+        <input [ngClass]="{'invalidButton': price.invalid || category.invalid || sku.invalid || description.invalid || name.invalid}"
+               [disabled]="category.invalid || price.invalid || description.invalid || name.invalid || sku.invalid"
+               class = "editButton" type="submit" value="Add Product">
+        <input class="editButton" type="reset" aria-valuemax="Reset">
+      </td>
     </tr>
 
 

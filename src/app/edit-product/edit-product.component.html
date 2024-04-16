@@ -15,28 +15,53 @@
     </tr>
 
     <tr>
-      <td>Name</td>
-      <td><input type="text" name="name" [(ngModel)]="product.name"></td>
+      <td>
+          <span [ngClass]="{'invalidLabel': name.invalid}">Name
+          <span *ngIf="name.invalid && name.errors?.['required'] != null"> (There needs to be a name)</span>
+          <span *ngIf="name.invalid && name.errors?.['maxLength'] != null"> (Too Many Letters!!!)</span>
+        </span>
+      </td>
+      <td><input type="text" required maxlength="30" name="name" [(ngModel)]="product.name" #name="ngModel"></td>
     </tr>
 
     <tr>
-      <td>Description</td>
-      <td><input type="text" name="description" [(ngModel)]="product.description"></td>
+      <td>
+        <span [ngClass]="{'invalidLabel': description.invalid}">Description
+          <span *ngIf="description.invalid && description.errors?.['required'] != null"> (There needs to be a description)</span>
+          <span *ngIf="description.invalid && description.errors?.['maxLength'] != null"> (Too Many Letters!!!)</span>
+        </span>
+      </td>
+      <td><input type="text" required maxlength="300" name="description" [(ngModel)]="product.description" #description="ngModel"></td>
     </tr>
 
     <tr>
-      <td>Category</td>
-      <td><input type="text" name="category" [(ngModel)]="product.category"></td>
+      <td>
+        <span [ngClass]="{'invalidLabel': category.invalid}">Category
+          <span *ngIf="category.invalid && category.errors?.['required'] != null"> (There needs to be a category)</span>
+          <span *ngIf="category.invalid && category.errors?.['maxLength'] != null"> (Too Many Letters!!!)</span>
+        </span>
+      </td>
+      <td><input type="text" required maxlength="30" name="category" [(ngModel)]="product.category" #category="ngModel"></td>
     </tr>
 
     <tr>
-      <td>Price</td>
-      <td><input type="text" name="price" [(ngModel)]="product.price"></td>
+      <td><span [ngClass]="{'invalidLabel': price.invalid}">Price
+
+        <span *ngIf="price.invalid && price.errors?.['min'] != null"> (Price must be a positive number)</span>
+        <span *ngIf="price.invalid && price.errors?.['required'] != null"> (There needs to be a price)</span>
+      </span></td>
+      <td><input type="number" required min="0.01" name="price" [(ngModel)]="product.price" #price="ngModel"></td>
     </tr>
 
 
     <tr>
-      <td colspan="2"><input type="submit" value="Edit Product"><input type="reset" aria-valuemax="Reset"></td>
+
+      <td colspan="2">
+        <input [ngClass]="{'invalidButton': price.invalid || category.invalid || description.invalid || name.invalid}"
+               [disabled]="category.invalid || price.invalid || description.invalid || name.invalid"
+               class = "editButton" type="submit" value="Edit Product">
+        <input class="editButton" type="reset" aria-valuemax="Reset">
+      </td>
     </tr>
 
 
